@@ -5,8 +5,14 @@
 - [x] Design program in Object-Oriented
 
 ## How to run ##
-
-* Go to "build" directory and run cmake..
+```
+$ mkdir build
+$ cd build
+$ cmake ..
+$ make
+$ coccoc “many words” [path to directory]
+```
+- ex: coccoc “This article is about the concept of” ../test
 
 ## UML ##
 Format: ![UML diagram](test.png)
