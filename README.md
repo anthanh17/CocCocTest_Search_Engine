@@ -34,6 +34,3 @@ $ make
 $ coccoc “many words” [path to directory]
 ```
 - Ex: coccoc “This article is about the concept of” ../test
-
-## UML ##
-Format: ![UML diagram](test.png)
