@@ -7,9 +7,9 @@
 
 namespace fs = std::filesystem;
 
-void buildDictionary(std::shared_ptr<InvertedIndex> data, std::string path, std::set<std::string> lookUpStrings) {
+void buildDictionary(std::shared_ptr<InvertedIndex> data, std::string& path, std::set<std::string>& lookUpStrings) {
     try {
-        for (const auto & file : fs::recursive_directory_iterator(path)) {
+        for (const auto& file : fs::recursive_directory_iterator(path)) {
         if(is_regular_file(file)) {
             data->buildDictionary(file.path().string());
         }
@@ -23,7 +23,7 @@ void buildDictionary(std::shared_ptr<InvertedIndex> data, std::string path, std:
     //data->showFileNameWithWord(lookUpStrings);
 }
 
-std::set<std::string> inputHanlder(std::string& manyWords, std::string path, std::shared_ptr<Search> search) {
+std::set<std::string> inputHanlder(std::string& manyWords, std::string& path, std::shared_ptr<Search> search) {
     auto tokenize = search->getTokenize();
     tokenize->inputEnvParser(manyWords);
 
@@ -41,7 +41,7 @@ std::set<std::string> inputHanlder(std::string& manyWords, std::string path, std
     return lookUpStrings;
 }
 
-void searchHandler(std::set<std::string> lookUpStrings, std::shared_ptr<Search> search) {
+void searchHandler(std::set<std::string>& lookUpStrings, std::shared_ptr<Search> search) {
     for (auto word : lookUpStrings) {
         if (search->searchWord(word)){
             continue;
@@ -49,7 +49,7 @@ void searchHandler(std::set<std::string> lookUpStrings, std::shared_ptr<Search> 
     }
 }
 
-void booleanLogic(std::shared_ptr<Search> search, std::set<std::string> lookUpStrings) {
+void booleanLogic(std::shared_ptr<Search> search, std::set<std::string>& lookUpStrings) {
     auto listFileName = std::move(search->getListFileName());
 
     // std::cout << "\nList file contain words: " << "\n";
@@ -60,8 +60,8 @@ void booleanLogic(std::shared_ptr<Search> search, std::set<std::string> lookUpSt
 
     int count = lookUpStrings.size();
     std::unordered_map <std::string, int> mMap{};
-    for (auto &a : listFileName) {
-        mMap[a] ++;
+    for (const auto& l : listFileName) {
+        mMap[l] ++;
     }
     // std::cout << "Count of parameters: "<< count << std::endl;
     // std::cout << "\nFile occurrences: \n";
@@ -70,7 +70,7 @@ void booleanLogic(std::shared_ptr<Search> search, std::set<std::string> lookUpSt
     // }
     // std::cout << std::endl;
     std::set<std::string> result{};
-    for (auto& file : listFileName) {
+    for (const auto& file : listFileName) {
         if(mMap[file] == count) {
             result.insert(file);
         }
