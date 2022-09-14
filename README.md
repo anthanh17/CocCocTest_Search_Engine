@@ -22,9 +22,6 @@ file3
 - [x] Programming language: C++
 - [x] OS: Windows, OS X or Linux
 - [x] Design program in Object-Oriented
-- [x] Design program in Object-Oriented
-
-
 ## How to run ##
 ```
 $ mkdir build
