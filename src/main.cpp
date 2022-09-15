@@ -10,10 +10,10 @@ namespace fs = std::filesystem;
 void buildDictionary(std::shared_ptr<InvertedIndex> data, std::string& path, std::set<std::string>& lookUpStrings) {
     try {
         for (const auto& file : fs::recursive_directory_iterator(path)) {
-        if(is_regular_file(file)) {
-            data->buildDictionary(file.path().string());
+            if(is_regular_file(file)) {
+                data->buildDictionary(file.path().string());
+            }
         }
-    }
     }
     catch(std::filesystem::filesystem_error const& ex) {
         std::cout
