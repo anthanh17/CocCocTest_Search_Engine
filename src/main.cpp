@@ -91,7 +91,7 @@ int main(int argc, char *argv[]) {
     std::string manyWords{};    // search words
     
     if (argc < 2) {
-        std::cerr << "Syntax error!  \n\t" 
+        std::cerr << "Syntax error!  \n" 
                   << "> coccoc “many words” [path to directory]" << std::endl; 
         return 1;
     } else if (argc < 3) {
@@ -103,7 +103,7 @@ int main(int argc, char *argv[]) {
     }
 
     auto search = std::make_shared<Search>();
-    auto lookUpStrings = inputHanlder(manyWords, path, search);
+    auto lookUpStrings = std::move(inputHanlder(manyWords, path, search));
     searchHandler(lookUpStrings, search);
     booleanLogic(search, lookUpStrings);
     return 0;
